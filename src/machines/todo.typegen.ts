@@ -5,6 +5,7 @@ export interface Typegen0 {
   eventsCausingActions: {
     assignTodosToContext: "done.invoke.Todo Machine.Loading Todos:invocation[0]";
     assignErrorToContext: "error.platform.Todo Machine.Loading Todos:invocation[0]";
+    assignFormInputToContext: "Form Input Change";
   };
   internalEvents: {
     "done.invoke.Todo Machine.Loading Todos:invocation[0]": {
@@ -32,6 +33,12 @@ export interface Typegen0 {
   };
   eventsCausingGuards: {};
   eventsCausingDelays: {};
-  matchesStates: "Loading Todos" | "Todos Loaded" | "Loading Todos errored";
+  matchesStates:
+    | "Loading Todos"
+    | "Todos Loaded"
+    | "Loading Todos errored"
+    | "Creating new todo"
+    | "Creating new todo.Showing input form"
+    | { "Creating new todo"?: "Showing input form" };
   tags: never;
 }
