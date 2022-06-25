@@ -2,7 +2,14 @@ import { useMachine } from '@xstate/react';
 import { TodoMachine } from './machines/todo';
 
 export default function App() {
-  const [machine, send] = useMachine(TodoMachine);
+  const [machine, send] = useMachine(TodoMachine, {
+    services: {
+      loadTodos: async () => {
+        // throw new Error('oh nooooo');
+        return ['Sleep', 'Eat', 'Sleep'];
+      },
+    },
+  });
   return (
     <div className='App'>
       <h1>Hello CodeSandbox, {machine.value}</h1>
