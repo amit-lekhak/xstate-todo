@@ -2,7 +2,7 @@ import { useMachine } from '@xstate/react';
 import { TodoMachine } from './machines/todo';
 
 export default function App() {
-  const [machine, send] = useMachine(TodoMachine, {
+  const [machine] = useMachine(TodoMachine, {
     services: {
       loadTodos: async () => {
         // throw new Error('oh nooooo');
@@ -12,22 +12,10 @@ export default function App() {
   });
   return (
     <div className='App'>
-      <h1>Hello CodeSandbox, {machine.value}</h1>
-      <h2>Start clicking to see some magic happen!</h2>
-      <button
-        onClick={() =>
-          send({ type: 'Loading Todos Success', todos: ['Sleep'] })
-        }
-      >
-        Click for mouseover
-      </button>
-      <button
-        onClick={() =>
-          send({ type: 'Loading Todos Error', errorMessage: 'Not again !!!' })
-        }
-      >
-        Click for mouseout
-      </button>
+      <h1>
+        <pre>Hello React, {machine.value}</pre>
+        <pre>{JSON.stringify(machine.context)}</pre>
+      </h1>
     </div>
   );
 }
