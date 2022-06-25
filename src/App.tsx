@@ -14,7 +14,7 @@ export default function App() {
         todos.add(context.formInput);
       },
       deleteTodo: async (context, event) => {
-        // throw new Error('ooooohhhh no');
+        throw new Error('ooooohhhh no');
         todos.delete(event.todo);
       },
     },
@@ -24,23 +24,27 @@ export default function App() {
       <pre>Hello React, {JSON.stringify(state.value)}</pre>
       <pre>{JSON.stringify(state.context)}</pre>
 
-      {state.context.todos.map((td) => {
-        return (
-          <div key={td} style={{ display: 'flex' }}>
-            <p>{td}</p>
-            <button
-              onClick={() => {
-                send({
-                  type: 'Delete',
-                  todo: td,
-                });
-              }}
-            >
-              Delete
-            </button>
-          </div>
-        );
-      })}
+      {state.matches('Todos Loaded') && (
+        <>
+          {state.context.todos.map((td) => {
+            return (
+              <div key={td} style={{ display: 'flex' }}>
+                <p>{td}</p>
+                <button
+                  onClick={() => {
+                    send({
+                      type: 'Delete',
+                      todo: td,
+                    });
+                  }}
+                >
+                  Delete
+                </button>
+              </div>
+            );
+          })}
+        </>
+      )}
 
       {state.matches('Todos Loaded') && (
         <button
@@ -70,6 +74,10 @@ export default function App() {
             }}
           />
         </form>
+      )}
+
+      {state.matches('Deleting error') && (
+        <button onClick={() => send('Speed up')}>Speed up</button>
       )}
     </div>
   );
