@@ -4,7 +4,7 @@ import { TodoMachine } from './machines/todo';
 const todos = new Set<string>(['Sleep', 'Eat']);
 
 export default function App() {
-  const [machine, send] = useMachine(TodoMachine, {
+  const [state, send] = useMachine(TodoMachine, {
     services: {
       loadTodos: async () => {
         // throw new Error('oh nooooo');
@@ -13,14 +13,36 @@ export default function App() {
       saveTodo: async (context, event) => {
         todos.add(context.formInput);
       },
+      deleteTodo: async (context, event) => {
+        // throw new Error('ooooohhhh no');
+        todos.delete(event.todo);
+      },
     },
   });
   return (
     <div>
-      <pre>Hello React, {JSON.stringify(machine.value)}</pre>
-      <pre>{JSON.stringify(machine.context)}</pre>
+      <pre>Hello React, {JSON.stringify(state.value)}</pre>
+      <pre>{JSON.stringify(state.context)}</pre>
 
-      {machine.matches('Todos Loaded') && (
+      {state.context.todos.map((td) => {
+        return (
+          <div key={td} style={{ display: 'flex' }}>
+            <p>{td}</p>
+            <button
+              onClick={() => {
+                send({
+                  type: 'Delete',
+                  todo: td,
+                });
+              }}
+            >
+              Delete
+            </button>
+          </div>
+        );
+      })}
+
+      {state.matches('Todos Loaded') && (
         <button
           onClick={() => {
             send('Create new todo');
@@ -30,7 +52,7 @@ export default function App() {
         </button>
       )}
 
-      {machine.matches('Creating new todo.Showing input form') && (
+      {state.matches('Creating new todo.Showing input form') && (
         <form
           onSubmit={(e) => {
             e.preventDefault();

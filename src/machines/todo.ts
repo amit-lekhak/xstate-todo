@@ -1,7 +1,7 @@
 import { assign, createMachine } from 'xstate';
 
 export const TodoMachine =
-  /** @xstate-layout N4IgpgJg5mDOIC5QBUD2FUAICyBDAxgBYCWAdmAHQAyquEZUmaGsAxBuRWQG6oDWlZljxEylGnQZN0qWAh6p8uAC7FUpANoAGALqJQAB1nFV6-SAAeiALQBOAIwUAHLYDMt2wFYA7PdveANgAWfwAaEABPG1dvbwpPAICAJg9XLX97TySAX2zwoRwCEk4JelJGITYwACdq1GqKAwAbFQAzeoBbCgKRYvFaMoqZOQUlU01dcyNYEzVScysEa1cnTwpXJNdMoK0Q708nJyDwqKX7INcKbw20zN2PIPtc-JlC0U5KzFLIVgBharAKjAmHIAHdMMoZFNjOMFogkul4i5bDsjrYtElDsdIjZ7EkghRNkkUgFVhjiZ5XM8QD0imIKP9AapyiCwODIRgKABlQioUFSMgGACuykw7WqHVYADFOpgAJKkYWi36EXDlMDQmawpCWGyeNb6rSklLeIKHJyuVwneEY+IxLSuRJadKZVbU2nvSiMlRSMEQmTc3n8lmCkVizqsLlCgBGHRMmtmZh1ixia1sAQcG02Xg21oQHgoLvO6XTRP27tevXp3uZjD9HNQ3Nw3CkDfY6koCgE3UrdM4Nd9bP9nK5zdbMnkpF4Yzm2j0OumifmycQ+scDj83gpWm8KLz1iSni0FBRPiC+JS9n2QQrGDefQZAJ9LPrAdHLZZbZqdQazTanR7O8q37J9a1Zdk3zHT8J1GH11DnBNtVAFN7ACZxVgzJxMj8R4YjzJJEnWTxHiOLZXCCVEb2pUh0DgcwPQfUopEqRC5jhJZ3DQrc3FSLIEgCR190xJITyCM97HIrQfACJ48hpXtPUA2QvgGSBWKTZD4QkigBLSLQJP084ZKcfdHQJfi0mJHdKQOKiXiAvt+kkFlPm-eo1IXGE2JXJZcKuM0jOSUlPCvbFTjNdZHnOIJvH04IAi3W9hEcx8mUHCCRyDAVFTDcUOnU5dNIQewjSufwsIcIJjJkvNvCcfyUkdRrDnsC0kvvatQPS4dG3fccMAK9jKREhI-AOHikivWw8wSwsN31I8jVJKk5IYzq0pfIcG0GnzrF3eIj2NfwzUOS19zTLQsRKrxiM2N1VoUvodqK6wLjiU0sKqoLVlC-cxOPCydx2LJzlk3IgA */
+  /** @xstate-layout N4IgpgJg5mDOIC5QBUD2FUAICyBDAxgBYCWAdmAHQAyquEZUmaGsAxBuRWQG6oDWlZljxEylGnQZN0qWAh6p8uAC7FUpANoAGALqJQAB1nFV6-SAAeiALQBOAIwUAHLYDMt2wFYA7PdveANgAWfwAaEABPG1dvbwpPAICAJg9XLX97TySAX2zwoRwCEk4JelJGITYwACdq1GqKAwAbFQAzeoBbCgKRYvFaMoqZOQUlU01dcyNYEzVScysEa1cnTwpXJNdMoK0Q708nJyDwqKX7INcKbw20zN2PIPtc-JlC0U5KzFLIVgBharAKjAmHIAHdMMoZFNjOMFogkul4i5bDsjrYtElDsdIjZ7EkghRNkkUgFVhjiZ5XM8QD0imJusMvgMfgARMBNMDKMDQmawpCWRBBAKXfZaLTuA5JAIo1YnaJBNZObzirSeez2Q4ObzU2nvSj-QGqcogsDgyEYCgAZUIqFBUjIBgArspMO1qh1WAAxTqYACSpCdLt+hFw5W5-OmszM-MW1k8a3jWlJKW8QUOTlcrjlCARSXiMXFiTFDgOnh1r169INKikYIhMitNrtxodztdnVYlsdACMOiYeVH5jHEDE1rZpfYNpsvBtsx4KOl1TsPMkNvtyxg3n0KNWjYw6+bUFbcNwpIf2OpKAoBAzN5XOLva6b6xbLSezzJ5KReGM5to9BGMJzHCCDxo4Dh+N4FJaN4KLZtYSSeFoFAoj4QT4ik9j7EEG7CHSD4AjWxoHg2b6nsa541HUDTNG0nS3nheo7oRe4mmapHvhRn6jDW6j-gOfKgIsWwBM4qzSk4mR+I8MTZlKomuJ4jxHFsrhBKiOF5DSFb4ZQbIcqx54cFe378IIOlMfpnIfhgX4-rxEwAYYQHRkJiDnASKROIkOxaPY6Qwdipxxj4FCkmplJbLYSSBAEuFbvSVmGTIrBUfUjQtMobpdLq25JTZqB2YoDn8YBvLAcOCDeXE3iSa4pIqQqATwTFTj5vstguCJTiYmW1KkOgcDmLl9KlFIlQCRVblLO4olQW4qRZAkwrNTiSyYnmqGppOOw+AETxaSNHyMt8ECTa5Ao5pOYWZmKk5+ec+1OPB9UEstaTEjBlIHJpLx3rp1ADONjJpQCZ1lYOIHWDJVxpo9ySkmqqbZmm6yPB5yr2MEARQfF976ixT7sa+Tb2gGbbZedQ7Tf5c3+JJDhChq+3ZrVsMpPVHOHBqVKHRZ26PsRz6Hse5GMIeVMgZSeYJH4BwLUkWG2NmOMLhB8ZIUm4V4wDgv7sLUIQ4Jl3WLB8RIcm-hpocmbwWOWhYv5XhKZstU65Z7LWVxGCS5VgQEsqRxpl4yqPPB6kEhsON4rEKy3O7eWe6xoO+9NSp5ouCroupk7K2t1hYXNaY7CsrWdYECdiKnJsXDVcNCgjqxYUFNjCsh4UKjEaYHGpuS5EAA */
   createMachine(
     {
       context: {
@@ -21,12 +21,19 @@ export const TodoMachine =
             }
           | {
               type: 'Submit';
+            }
+          | {
+              type: 'Delete';
+              todo: string;
             },
         services: {} as {
           loadTodos: {
             data: string[];
           };
           saveTodo: {
+            data: void;
+          };
+          deleteTodo: {
             data: void;
           };
         },
@@ -56,6 +63,9 @@ export const TodoMachine =
             'Create new todo': {
               target: 'Creating new todo',
             },
+            Delete: {
+              target: 'Deleting todo',
+            },
           },
         },
         'Loading Todos errored': {},
@@ -82,14 +92,31 @@ export const TodoMachine =
                 ],
                 onError: [
                   {
-                    target: 'Showing input form',
                     actions: 'assignErrorToContext',
+                    target: 'Showing input form',
                   },
                 ],
               },
             },
           },
         },
+        'Deleting todo': {
+          invoke: {
+            src: 'deleteTodo',
+            onDone: [
+              {
+                target: 'Loading Todos',
+              },
+            ],
+            onError: [
+              {
+                target: 'Deleting error',
+                actions: 'assignErrorToContext',
+              },
+            ],
+          },
+        },
+        'Deleting error': {},
       },
     },
     {
